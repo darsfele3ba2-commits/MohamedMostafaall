@@ -9080,11 +9080,14 @@ function handleLogin() {
         // Different colors for variety
         const colors = ['blue', 'green', 'yellow', 'purple', 'rose', 'orange', 'sky'];
         const c = colors[idx % colors.length];
-        container.innerHTML += `
-            <button onclick="startTopic('${topic.key}', '${topic.title}')" class="btn-modern bg-white text-gray-800 font-bold p-4 rounded-2xl shadow-md border-l-8 border-${c}-400 hover:bg-${c}-50 hover:scale-105 transition-all text-left flex justify-between items-center group">
-                <span class="english-text text-lg">${topic.title}</span>
-                <span class="text-${c}-300 group-hover:text-${c}-500">▶</span>
-            </button>`;
+        const btn = document.createElement('button');
+        btn.className = `btn-modern bg-white text-gray-800 font-bold p-4 rounded-2xl shadow-md border-l-8 border-${c}-400 hover:bg-${c}-50 hover:scale-105 transition-all text-left flex justify-between items-center group`;
+        btn.innerHTML = `
+                <span class="english-text text-lg"></span>
+                <span class="text-${c}-300 group-hover:text-${c}-500">▶</span>`;
+        btn.querySelector('span').innerText = topic.title;
+        btn.addEventListener('click', () => startTopic(topic.key, topic.title));
+        container.appendChild(btn);
     });
 
     hideAllViews();
